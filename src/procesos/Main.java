@@ -3,6 +3,7 @@ package procesos;
 import act1.*;
 import act2.*;
 import act3.*;
+import act4.*;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,13 +54,32 @@ public class Main {
 
     }
 
+    public static void act4(){
+        Semaphore papel = new Semaphore(0);
+        Semaphore tabaco = new Semaphore(0);
+        Semaphore fosforo = new Semaphore(0);
+        Semaphore listo = new Semaphore(0);
+        
+        Proveedor prove = new Proveedor(papel, tabaco, fosforo, listo);
+        FumadorPapel fumPapel = new FumadorPapel(papel, listo);
+        FumadorTabaco fumTabaco = new FumadorTabaco(tabaco, listo);
+        FumadorFosforo fumFosforo = new FumadorFosforo(fosforo, listo);
+        
+        
+        prove.start();
+        fumPapel.start();
+        fumTabaco.start();
+        fumFosforo.start();
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
         //act1();
         //act2();
-        act3();
+        //act3();
+        act4();
     }
 
 }
