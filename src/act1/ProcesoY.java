@@ -30,7 +30,7 @@ public class ProcesoY extends Thread{
 
             semaforo.release();
         } catch (InterruptedException ex) {
-            System.getLogger(ProcesoX.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(ProcesoY.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 }

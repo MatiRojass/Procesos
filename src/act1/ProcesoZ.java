@@ -31,7 +31,7 @@ public class ProcesoZ extends Thread{
             
             System.out.println("[PROCESO Z] valor de OBJ: " + obj.contador);
         } catch (InterruptedException ex) {
-            System.getLogger(ProcesoX.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(ProcesoZ.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 }
