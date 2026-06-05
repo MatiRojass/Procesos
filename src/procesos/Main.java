@@ -1,8 +1,8 @@
 package procesos;
 
 import act1.*;
-import act2.Albanil;
-import act2.Cadete;
+import act2.*;
+import act3.*;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,23 +26,40 @@ public class Main {
         procZ.start();
     }
 
-    public static void act2(){
+    public static void act2() {
         Semaphore baldeArriba = new Semaphore(0);
         Semaphore baldeAbajo = new Semaphore(1);
-        
+
         Albanil alb = new Albanil(baldeArriba, baldeAbajo);
         Cadete cad = new Cadete(baldeArriba, baldeAbajo);
-        
+
         alb.start();
         cad.start();
     }
-    
+
+    public static void act3() {
+        Semaphore s = new Semaphore(1);
+        Semaphore elementos = new Semaphore(0);
+
+        ED ed = new ED(0);
+
+        P1 p1 = new P1(s, elementos, ed);
+        P2 p2 = new P2(s, elementos, ed);
+
+        p1.start();
+        p2.start();
+
+        System.out.println("[Final] Valor de n = " + ed.n);
+
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
         //act1();
-        act2();
+        //act2();
+        act3();
     }
 
 }
