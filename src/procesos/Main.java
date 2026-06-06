@@ -4,9 +4,9 @@ import act1.*;
 import act2.*;
 import act3.*;
 import act4.*;
+import act5.*;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -72,6 +72,24 @@ public class Main {
         fumFosforo.start();
     }
     
+    public static void act5(){
+        Semaphore sc1 = new Semaphore(0); 
+        Semaphore sc2 = new Semaphore(0); 
+        Semaphore sigPlato1 = new Semaphore(0); 
+        Semaphore sigPlato2 = new Semaphore(0);
+        Semaphore ensalada = new Semaphore(1);
+        //Para probar los iniciamos en 3 sino se hace muy largo.
+        Platos platos = new Platos(3, 3);
+        
+        Comensal1 com1 = new Comensal1(sc1, sigPlato1, ensalada, platos);
+        Comensal2 com2 = new Comensal2(sc2, sigPlato2, ensalada, platos);
+        Camarero cam = new Camarero(sc1, sigPlato1, sc2, sigPlato2, platos);
+        
+        com1.start();
+        com2.start();
+        cam.start();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -79,7 +97,8 @@ public class Main {
         //act1();
         //act2();
         //act3();
-        act4();
+        //act4();
+        act5();
     }
 
 }
