@@ -5,8 +5,8 @@ import act2.*;
 import act3.*;
 import act4.*;
 import act5.*;
+import act6.*;
 import java.util.concurrent.Semaphore;
-
 
 /**
  *
@@ -54,42 +54,60 @@ public class Main {
 
     }
 
-    public static void act4(){
+    public static void act4() {
         Semaphore papel = new Semaphore(0);
         Semaphore tabaco = new Semaphore(0);
         Semaphore fosforo = new Semaphore(0);
         Semaphore listo = new Semaphore(0);
-        
+
         Proveedor prove = new Proveedor(papel, tabaco, fosforo, listo);
         FumadorPapel fumPapel = new FumadorPapel(papel, listo);
         FumadorTabaco fumTabaco = new FumadorTabaco(tabaco, listo);
         FumadorFosforo fumFosforo = new FumadorFosforo(fosforo, listo);
-        
-        
+
         prove.start();
         fumPapel.start();
         fumTabaco.start();
         fumFosforo.start();
     }
-    
-    public static void act5(){
-        Semaphore sc1 = new Semaphore(0); 
-        Semaphore sc2 = new Semaphore(0); 
-        Semaphore sigPlato1 = new Semaphore(0); 
+
+    public static void act5() {
+        Semaphore sc1 = new Semaphore(0);
+        Semaphore sc2 = new Semaphore(0);
+        Semaphore sigPlato1 = new Semaphore(0);
         Semaphore sigPlato2 = new Semaphore(0);
         Semaphore ensalada = new Semaphore(1);
         //Para probar los iniciamos en 3 sino se hace muy largo.
         Platos platos = new Platos(3, 3);
-        
+
         Comensal1 com1 = new Comensal1(sc1, sigPlato1, ensalada, platos);
         Comensal2 com2 = new Comensal2(sc2, sigPlato2, ensalada, platos);
         Camarero cam = new Camarero(sc1, sigPlato1, sc2, sigPlato2, platos);
-        
+
         com1.start();
         com2.start();
         cam.start();
     }
-    
+
+    public static void act6() {
+        Semaphore ruedas = new Semaphore(0);
+        Semaphore cuadros = new Semaphore(0);
+        Semaphore manubrios = new Semaphore(0);
+        Semaphore espacioRuedas = new Semaphore(20);
+        Semaphore espacioCuadros = new Semaphore(10);
+        Semaphore espacioManubrios = new Semaphore(10);
+        
+        Operador1 op1 = new Operador1(ruedas, espacioRuedas);
+        Operador2 op2 = new Operador2(cuadros, espacioCuadros);
+        Operador3 op3 = new Operador3(manubrios, espacioManubrios);
+        Armador arm = new Armador(ruedas, cuadros, manubrios, espacioRuedas, espacioCuadros, espacioManubrios);
+        
+        op1.start();
+        op2.start();
+        op3.start();
+        arm.start();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -98,7 +116,8 @@ public class Main {
         //act2();
         //act3();
         //act4();
-        act5();
+        //act5();
+        act6();
     }
 
 }
