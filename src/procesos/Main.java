@@ -6,6 +6,7 @@ import act3.*;
 import act4.*;
 import act5.*;
 import act6.*;
+import act7.*;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -108,6 +109,18 @@ public class Main {
         arm.start();
     }
 
+    public static void act7(){
+        Semaphore pista = new Semaphore(3);
+        Semaphore hangares = new Semaphore(10);
+        Semaphore trayecto = new Semaphore(1);
+        
+        Salida salida = new Salida(pista, hangares, trayecto);
+        Llegada llegada = new Llegada(pista, hangares, trayecto);
+        
+        salida.start();
+        llegada.start();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -117,7 +130,8 @@ public class Main {
         //act3();
         //act4();
         //act5();
-        act6();
+        //act6();
+        //act7();
     }
 
 }
